@@ -1,0 +1,1 @@
+# Sevita-django
