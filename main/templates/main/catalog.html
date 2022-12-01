@@ -1,0 +1,53 @@
+{%  extends 'main/base.html' %}
+{% load static %}
+{% load main_tags %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<section class="catalog">
+    <div class="wrapper">
+        <div class="about__header">
+            <a href="" class="about__pic"><img src="{% static 'main/img/svg/about-header.svg'%}" alt="sevita"
+                                               class="about__header-pic"></a>
+        </div>
+        <div class="catalog__content">
+            <div class="catalog__header">
+                <h1>Каталог товаров</h1>
+                <img src="{% static 'main/img/svg/delimiter-line.svg'%}" alt="delimiter" class="delimiter-line">
+            </div>
+            {% include 'main/products_list.html' with products=products %}
+
+            {% if page_obj.has_other_pages %}
+            <nav class="list-pages">
+                <ul>
+                    {% if page_obj.has_previous %}
+                    <li class="page-num">
+                        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+                    </li>
+                    {% endif %}
+
+                    {% for page in paginator.page_range %}
+                    {% if page_obj.number == page %}
+                    <li class="page-num page-num-selected">{{ page }}</li>
+                    {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                    <li class="page-num">
+                        <a href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-num">
+                        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% load main_tags %}
+{% load static %}
+
+{% if user.is_authenticated %}
+<script src="{% static 'main/js/ajax.js'%}"></script>
+<div class="cart__block">
+    <!--  Впишешь в верхний div какой-нибудь класс (либо оставь cart__block) и сделай для него позиционирование  -->
+    <!--  В нижний класс (add-to-cart) добавь картнику на background. Класс в css уже создан. УБЕРИ ПОТОМ ЭТИ КОММЕНТАРИИ!  -->
+    <button class="add-to-cart" data-type="{{ type }}"
+         data-id="{{ prod.id }}" id="cart_{{ prod.id }}">Добавить в корзину
+    </button>
+</div>
+
+<script>
+    // Подключение обработчика
+    $(function() {
+        $('[id="cart_{{ prod.id }}"]').click(to_cart);
+    });
+</script>
+
+{% endif %}

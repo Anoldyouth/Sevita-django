@@ -1,0 +1,70 @@
+{%  extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="product">
+    <div class="wrapper">
+        <!--  Header  -->
+        <div class="about__header">
+            <a href="" class="about__pic">
+                <img src="{% static 'main/img/svg/about-header.svg'%}" alt="sevita" class="about__header-pic">
+            </a>
+        </div>
+    </div>
+
+
+    <!--  Product  -->
+    <div class="wrapper">
+        <div class="product__wrapper">
+            <div class="product__photos">
+                {% if prod.preview %}
+                <img src="{% static 'main/img/left.png'%}" alt="left_arrow" class="arrow left limit"><!--
+                --><img src="{{prod.preview.url}}" alt="{{prod.title}}" class="product__preview active"><!--
+                --><img src="{{prod.on_hover.url}}" alt="{{prod.title}}" class="product__preview"><!--
+                --><img src="{{prod.additional.url}}" alt="{{prod.title}}" class="product__preview"><!--
+                --><img src="{% static 'main/img/right.png'%}" alt="right_arrow" class="arrow right">
+                {% endif %}
+            </div>
+            <div class="product_description">
+                <p class="product__title">{{prod.title}}</p>
+                <p class="product__volume">Выберите объём:</p>
+                <script src="{% static 'main/js/scripts.js'%}"></script>
+                <div class="product__buttons">
+                    <button id="2.5ml" class="btn" onclick="setPrice({{prod.low_price}}, '2.5ml')" disabled>2,5 мл
+                    </button>
+                    <button id="5ml" class="btn" onclick="setPrice({{prod.medium_price}}, '5ml')">5 мл</button>
+                    <button id="10ml" class="btn" onclick="setPrice({{prod.high_price}}, '10ml')">10 мл</button>
+                </div>
+                <p class="prod__price" id="price">Цена: {{prod.low_price}} руб.</p>
+                <p class="prod__desc">{{prod.content|linebreaks}}</p>
+
+
+            </div>
+
+            <div class="product__feedback">
+                <p class="product__fbheader">Вы можете оставить заявку на покупку, заполнив форму ниже:</p>
+                <div class="form__wrapper">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        <div class="form_error">{{ form.non_field_errors }}</div>
+
+                        {% for f in form %}
+                        <label for="{{ f.id_for_label }}" class="form_label">{{f.label}}: </label>
+                        <p class="form_answer">{{ f }}</p>
+                        <div class="form_error">{{ f.errors }}</div>
+                        {% endfor %}
+
+                        <div class="form_btn">
+                            <button class="btn new-margin_btn" type="submit">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="{% static 'main/js/slider.js'%}"></script>
+</section>
+{% endblock %}

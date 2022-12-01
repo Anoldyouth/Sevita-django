@@ -1,0 +1,41 @@
+{% load static %}
+
+<script>
+    <!--Исправление ошибки в консоли браузера с множественной подгрузкой переменной-->
+    const added_to_favorites_class = 'added';
+</script>
+
+<div class="catalog__wrapper">
+    {% for p in products %}
+    <div class="catalog__item">
+        <a href="{{p.get_absolute_url}}">
+            <img src="{{p.preview.url}}" alt="{{p.title}}" id="photo_{{ p.id }}"
+                 class="catalog__item-preview">
+            <style>
+                #photo_{{ p.id }}:hover{
+                    content: url("{{p.on_hover.url}}");
+                }
+
+            </style>
+        </a>
+        <a href="{{p.get_absolute_url}}" class="catalog__item-title"><p
+                class="catalog__item-title">{{p.title}}</p></a>
+        <a href="{{p.get_absolute_url}}" class="catalog__item-price">
+            {% if p.low_price != "-" %}
+            <p class="catalog__item-price">от {{p.low_price}} руб.</p>
+            {% elif p.medium_price != "-" %}
+            <p class="catalog__item-price">от {{p.medium_price}} руб.</p>
+            {% else %}
+            <p class="catalog__item-price">от {{p.high_price}} руб.</p>
+            {% endif %}
+        </a>
+
+        <!--   Подключаем ajax для кнопки 'Избранное'   -->
+        <script src="{% static 'main/js/ajax.js'%}"></script>
+        {% include 'main/add_to_favorites.html' with type="product" prod=p %}
+        <!--   Обработчик кнопки 'В корзину'   -->
+        {% include 'main/add_to_cart.html' with type="product" prod=p %}
+
+    </div>
+    {% endfor %}
+</div>

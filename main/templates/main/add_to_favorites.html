@@ -1,0 +1,18 @@
+{% load main_tags %}
+{% load static %}
+
+{% if user.is_authenticated %}
+<script src="{% static 'main/js/ajax.js'%}"></script>
+<div class="add__block">
+    <div class="add-to-favorites {% if prod.favorites_set.all|user_in:user %}added{% endif %}" data-type="{{ type }}"
+         data-id="{{ prod.id }}" id="fav_{{ prod.id }}"></div>
+</div>
+
+<script>
+    // Подключение обработчика
+    $(function() {
+        $('[id="fav_{{ prod.id }}"]').click(to_favorites);
+    });
+</script>
+
+{% endif %}

@@ -1,0 +1,135 @@
+{%  extends 'main/base.html' %}
+{% load static %}
+{% load main_tags %}
+
+{% block content %}
+<!--    Основное тело    -->
+<main class="main">
+    <!--   О нас   -->
+    <section class="about">
+        <div class="about_wrapper">
+            <div class="about__header">
+                <a href="" class="about__pic"><img src="{% static 'main/img/svg/about-header.svg'%}" alt="sevita"
+                                                   class="about__header-pic"></a>
+                <p><a name="about"></a></p>
+            </div>
+
+            <div class="about__content">
+                <img src="{% static 'main/img/about-pic.png'%}" alt="About" class="about__content-pic" align="middle">
+                <div class="about__content-description">
+                    <h1>О проекте</h1>
+                    <img src="{% static 'main/img/svg/delimiter-line.svg'%}" alt="delimiter" class="delimiter-line">
+                    Нишевый парфюм — достаточно редкая история: его практически не купишь в популярных косметических
+                    магазинах и мало на ком встретишь. А еще ниша дорого стоит, и отдать состояние за флакон, который
+                    может разонравиться — довольно обидно.<br>
+                    Чтобы вы не тратили деньги зря и искали новые ароматы с удовольствием, мы предлагаем распив —
+                    миниатюры самого разного нишевого парфюма. Вы можете приобрести абсолютно любой аромат в объёме от
+                    5мл, разносить его в любую погоду, в любом настроении, на разные мероприятия.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--   Часто задаваемые вопросы   -->
+    <section class="questions">
+        <script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://snipp.ru/cdn/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="{% static 'main/js/scripts.js'%}"></script>
+
+        <div class="wrapper">
+            <div class="qa__wrapper">
+                <div class="questions__content">
+                    <h1>Часто задаваемые вопросы</h1>
+                    <img src="{% static 'main/img/svg/delimiter-line.svg'%}" alt="delimiter" class="delimiter-line">
+                    <div class="questions-answers">
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <h2>1. Что такое распив?</h2>
+                                </div>
+                                <div>
+                                    <p class="answer">Распив - это когда парфюм из большого оригинального флакона
+                                        переносится в другой - специальный, новый, чистый- флакончик меньшего
+                                        объёма.</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <h2>2. Что такое атом/атомайзер?</h2>
+                                </div>
+                                <div>
+                                    <p class="answer">Это тот самый специальный флакончик меньшего объёма, куда
+                                        переносится парфюм. Доступный объем атомайзеров у меня: 5, 10, 18, 30мл.</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <h2>3. Что такое отливант?</h2>
+                                </div>
+                                <div>
+                                    <p class="answer">Это готовый маленький флакончик (атомайзер) с парфюмом, отлитый из
+                                        большого оригинального фирменного флакона, которым вы можете с удовольствием
+                                        пользоваться. На каждом отливанте есть наклейка с названием вашего аромата.</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <h2>4. Как долго я смогу им пользоваться?</h2>
+                                </div>
+                                <div>
+                                    <p class="answer">1мл - это около 10-15 пшиков в зависимости от аромата
+                                        (направления, концентрации,...) и ваших привычек. 2мл хватает примерно на 1
+                                        неделю активного использования, 5мл хватает примерно на месяц, 10мл на 2-3
+                                        месяца.</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <h2>5. У вас точно оригинал?</h2>
+                                </div>
+                                <div>
+                                    <p class="answer">Да, у меня точно оригинал) У меня проверенные годами поставщики.
+                                        Да и те редкие нишевые ароматы, которые я вам предлагаю, их просто не
+                                        подделывают.</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <h2>6. Почему именно наш магазин?</h2>
+                                </div>
+                                <div>
+                                    <p class="answer">Я познакомлю вас с новыми брендами, направлениями, с редкими
+                                        интересными ароматами. Помогу в спокойной обстановке подобрать аромат с учетом
+                                        ваших пожеланий и потребностей. При этом вам не придётся тратить десятки/сотни
+                                        тысяч рублей для знакомства с парфюмом и поиска своего идеального аромата!)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--   Каталог товаров   -->
+    <section class="catalog">
+        <div class="wrapper">
+            <div class="catalog__content">
+                <div class="catalog__header">
+                    <h1>Каталог товаров</h1>
+                    <img src="{% static 'main/img/svg/delimiter-line.svg'%}" alt="delimiter" class="delimiter-line">
+                </div>
+                {% include 'main/products_list.html' with products=products %}
+            </div>
+        </div>
+        <div class="watch-more">
+            <a href="{% url 'catalog' %}" class="catalog__watch-more">Посмотреть весь каталог...</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

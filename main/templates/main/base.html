@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'main/css/style.css'%}" rel="stylesheet">
+    <link rel="icon" href="{% static 'main/img/favicons/icon.svg' type='image/svg+xml'%}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="wrapper">
+        <div class="header__wrapper">
+            <div class="header__logo">
+                <a href="{% url 'home' %}" class="header__logo-link">
+                    <img src="{% static 'main/img/logo.png'%}" alt="SEVITA exclusive" class="header__logo-pic">
+                </a>
+            </div>
+
+            <nav class="header__nav">
+                <ul class="header__list">
+                    {% for item in header %}
+                    {% if page == 'home' and item.title == 'О нас' %}
+                    <li class="header__item">
+                        <a href="#about" class="header__link">О нас</a>
+                    </li>
+                    {% elif not forloop.last %}
+                    <li class="header__item">
+                        <a href="{% url item.url_name %}" class="header__link">{{item.title}}</a>
+                    </li>
+                    {% else %}
+                    <li class="header__item">
+                        <a href="#contacts" class="header__link">Контакты</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            <nav class="header__nav">
+                <p class="header__profile">
+                    <a href="#popup" class="header__profile-link">
+                        <img src="{% static 'main/img/svg/profile.svg'%}" alt="Профиль" class="header__profile-pic">
+                    </a>
+                </p>
+            </nav>
+        </div>
+    </div>
+</header>
+
+{% block content %}
+{% endblock content %}
+
+
+{% block footer %}
+<p><a name="contacts"></a></p>
+<section class="footer">
+    <div class="wrapper">
+        <div class="footer__wrapper">
+            <div class="footer__div-logo">
+                <img src="{% static 'main/img/logo.png'%}" alt="SEVITA exclusive" class="footer__logo">
+            </div>
+            <div class="footer__vk">
+                <p class="footer__vk-desc">
+                    По всем вопросам Вы можете написать в группу в ВК: <br>
+                    <a href="https://vk.com/sevita_shop" class="vk-link" target="_blank">
+                        <img src="{% static 'main/img/vk-logo.png'%}" alt="Написать нам" class="footer__vk-logo">
+                    </a>
+                </p>
+            </div>
+            <div class="footer__contacts">
+                Контакты:<br><br>
+                +7 9** *** **-**<br>
+                your-email@email.ru
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock footer %}
+
+<!--   Всплывающее окно авторизации/регистрации   -->
+<div id="popup" class="popup">
+    <a href="#header" class="popup__area"></a>
+    <div class="popup__body">
+        <div class="popup__content">
+            <a href="#header" class="popup__close">X</a>
+            {% if user.is_authenticated %}
+            <h1>Привет, {{request.user.username}}!</h1>
+            {% else %}
+            <h1>Вход</h1>
+            {% endif %}
+            <div class="popup_wrapper">
+                <div class="popup__form">
+                    {% if user.is_authenticated %}
+                    <p class="form_answer" style="text-align: center">Действия:<br><br>Корзина<br><br>Избранное<br></p>
+                    <div class="form_btn">
+                        <button class="btn new-margin_btn" type="submit"><a href="{% url 'exit' %}">Выход</a></button>
+                    </div>
+                    {% else %}
+                    <div class="tabs">
+                        <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+                        <label for="tab-btn-1">Авторизация</label>
+                        <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+                        <label for="tab-btn-2">Регистрация</label>
+
+                        <div id="content-1">
+                            <form method="post" action="{% url 'login' %}">
+                                {% csrf_token %}
+
+                                {% for f in login_form %}
+                                <label for="{{ f.id_for_label }}" class="form_label">{{f.label}}: </label>
+                                <p class="form_answer">{{ f }}</p>
+                                <div class="form_error">{{ f.errors }}</div>
+                                {% endfor %}
+                                <div class="tabs-button">
+                                    <button class="btn new-margin_btn" type="submit">Войти</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="content-2">
+                            {% include 'main/register.html' with registration_form=registration_form %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
